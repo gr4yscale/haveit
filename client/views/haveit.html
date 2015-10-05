@@ -1,0 +1,38 @@
+<head>
+  <title>Have it!</title>
+</head>
+
+<body>
+</body>
+
+<template name="mainLayout">
+	{{#onlyIfLoggedIn}}
+		{{> Template.dynamic template=main}}
+	{{/onlyIfLoggedIn}}
+</template>
+
+<template name="onlyIfLoggedIn">
+  {{#if authInProcess}}
+    <p>loading ...</p>
+  {{else}}
+    {{#if canShow}}
+      {{> UI.contentBlock }}
+    {{else}}
+      {{> loginButtons}}
+    {{/if}}
+  {{/if}}
+</template>
+
+<template name="linkList">
+	<form id="sendLinkForm">
+		<input type="text" default="url" name="url">
+		<input type="submit" name="newLink" value="Send">
+	</form>
+
+	<h1>Links:</h1>
+	<ul>
+		{{#each links}}
+			<li>{{url}}</li>
+		{{/each}}
+	</ul>
+</template>
