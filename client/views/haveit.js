@@ -11,24 +11,42 @@ if (Meteor.isClient) {
     }
   });
 
-  Template.linkList.helpers({
+  Template.links.helpers({
     links: function() {
-      return Links.find();
+      return Links.find( {'recipients': Meteor.user()._id} );
+    },
+    friends: function() {
+      return Connections.find( { source: Meteor.user()._id} );
     }
   });
 
-  Template.linkList.events({
+  Template.friends.helpers({
+    friends: function() {
+      var friend_ids = Connections.find( { source: Meteor.user()._id} )
+                                  .map(function(item){ return item.destination; });
+
+      return Meteor.users.find( {_id : {$in : friend_ids}} );
+    }
+  });
+
+  Template.links.events({
     'submit #sendLinkForm': function (event, template) {
-      var link = new Link({'url': event.target.url.value, 'title': 'title' + event.target.url.value, 'createdOn': Date.now()});
-      console.log(link);
+      var link = new Link({
+        'url': event.target.url.value, 
+        'title': 'title' + event.target.url.value, 
+        'createdOn': Date.now(), 
+        'recipients': ['9ohed4rkQpaSZfXhP'] 
+      });
       link.save();
       return false;
     }
   });
-}
 
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
+  Template.friends.events({
+    'submit #addFriendForm': function (event, template) {
+      Meteor.call('addFriend', event.target.friendName.value, event.target.email.value);
+      return false;
+    }
   });
+
 }

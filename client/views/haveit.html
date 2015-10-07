@@ -23,7 +23,7 @@
   {{/if}}
 </template>
 
-<template name="linkList">
+<template name="links">
 	<form id="sendLinkForm">
 		<input type="text" default="url" name="url">
 		<input type="submit" name="newLink" value="Send">
@@ -33,6 +33,22 @@
 	<ul>
 		{{#each links}}
 			<li>{{url}}</li>
+		{{/each}}
+	</ul>
+</template>
+
+
+<template name="friends">
+	<form id="addFriendForm">
+		Email address:
+		<input type="text" default="email address" name="email">
+		<input type="submit" name="newFriend" value="Add">
+	</form>
+
+	<h1>Friends:</h1>
+	<ul>
+		{{#each friends}}
+			<li>{{emails.[0].address}}</li>
 		{{/each}}
 	</ul>
 </template>
