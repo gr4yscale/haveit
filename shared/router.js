@@ -1,6 +1,12 @@
 FlowRouter.route('/', {
     action: function(params, queryParams) {
-		BlazeLayout.render("mainLayout", {main: "links"});
+		BlazeLayout.render("mainLayout", {main: "linkList"});
+    }
+});
+
+FlowRouter.route('/share', {
+    action: function(params, queryParams) {
+		BlazeLayout.render("mainLayout", {main: "linkShare"});
     }
 });
 
