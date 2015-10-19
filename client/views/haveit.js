@@ -23,25 +23,34 @@ if (Meteor.isClient) {
   // LinkShare
   //
   
-  //Template.linkShare.helpers({
-    //friends: function() {
-      //var friend_ids = Connections.find( { source: Meteor.user()._id} )
-                                  //.map(function(item){ return item.destination; });
+  Template.linkShare.created = function() {
+    this.friendsStore = new ReactiveVar([]);
 
-      //var friends = Meteor.users.find( {_id : {$in : friend_ids}} );
+      Meteor.call('getFriendsForId', Meteor.user()._id, (error, data) => {
+        if (error) {
+          console.log('there was an error ' + error);
+        } else {
+          this.friendsStore.set(data);
+        }
+      });
+  };
 
-      //return friends;
-    //}
-  //});
+  Template.linkShare.helpers({
+
+    friends: function() {
+      return Template.instance().friendsStore.get();
+    }
+  });
 
   Template.linkShare.events({
     'submit #shareLinkForm': function (event, template) {
+      var selectedFriendIds = $(event.target.friendsSelect).val();
       var link = new Link({
         'url': event.target.url.value, 
         'title': event.target.title.value, 
         'createdOn': Date.now(),
         'sender' : Meteor.userId(),
-        'recipients': ['9ohed4rkQpaSZfXhP'] 
+        'recipients': selectedFriendIds
       });
       link.save();
       return false;
@@ -55,7 +64,6 @@ if (Meteor.isClient) {
     this.friendsStore = new ReactiveVar([]);
 
       Meteor.call('getFriendsForId', Meteor.user()._id, (error, data) => {
-          console.log(data, arguments);
         if (error) {
           console.log('there was an error ' + error);
         } else {

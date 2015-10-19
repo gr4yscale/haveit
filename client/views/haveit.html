@@ -55,17 +55,21 @@
     Title:
 		<input type="text" default="title" name="title">
     </div>
+
+    <div>
+      <select id="friendsSelect" multiple="multiple">
+        {{#each friends}}
+          <option value="{{_id }}">{{emails.[0].address}}</option>
+        {{/each}}
+      </select>
+    </div>
+
+    <div>
 		<input type="submit" name="shareLink" value="Send">
+    </div>
 	</form>
-
-	<ul>
-		{{#each friends}}
-			<li>{{displayName}}</li>
-		{{/each}}
-	</ul>
+ 
 </template>
-
-
 
 
 <template name="friends">
