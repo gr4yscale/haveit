@@ -13,6 +13,7 @@ Meteor.methods({
       }
     },
     
+    //TOFIX: secure this; make it getFriends (no passing in userId)
     getFriendsForId:function(userId) {
       var friend_ids = Connections.find( { source: userId} )
                                   .map(function(item){ return item.destination; });

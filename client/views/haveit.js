@@ -1,4 +1,23 @@
+
+updateFriends = function() {
+  if (Meteor.user()) {
+    Meteor.call('getFriendsForId', Meteor.user()._id, (error, data) => {
+      if (error) {
+        console.log('there was an error ' + error);
+      } else {
+        console.log('set my friends list');
+        Session.set('friendsList', data);
+      }
+    });
+  }
+};
+
+
 if (Meteor.isClient) {
+
+  // Global as fuck
+  console.log('isClient called');
+
   // counter starts at 0
   Session.setDefault('counter', 0);
 

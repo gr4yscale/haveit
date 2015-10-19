@@ -40,6 +40,9 @@ LinkModel = Graviton.Model.extend({
     console.log('  ');
     console.log('  ');
     return recips;
+  },
+  recipCount: function() {
+    return this.recipients.find().count();
   }
 });
 

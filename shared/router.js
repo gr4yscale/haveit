@@ -1,3 +1,5 @@
+FlowRouter.triggers.enter([function() { updateFriends(); }]); // updateFriends is global in Meteor.startup(). Must be defined at runtime
+
 FlowRouter.route('/', {
     action: function(params, queryParams) {
       BlazeLayout.render("mainLayout", {main: "linkListReceived"});
