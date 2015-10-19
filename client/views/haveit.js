@@ -11,14 +11,24 @@ if (Meteor.isClient) {
     }
   });
 
-  // LinkList
+
+  // LinkListReceived
   //
-  Template.linkList.helpers({
-    links: function() {
-      //TOFIX: also find links if your userId is in a list of recipients
+  Template.linkListReceived.helpers({
+    receivedLinks: function() {
       return Links.find( {'recipients': Meteor.user()._id} );
     }
   });
+
+
+  // LinkListSent
+  //
+  Template.linkListSent.helpers({
+    sentLinks: function() {
+      return Links.find( {'sender': Meteor.user()._id} );
+    }
+  });
+
 
   // LinkShare
   //
@@ -45,13 +55,14 @@ if (Meteor.isClient) {
   Template.linkShare.events({
     'submit #shareLinkForm': function (event, template) {
       var selectedFriendIds = $(event.target.friendsSelect).val();
-      var link = new Link({
+      var link = Links.build({
         'url': event.target.url.value, 
         'title': event.target.title.value, 
         'createdOn': Date.now(),
         'sender' : Meteor.userId(),
         'recipients': selectedFriendIds
       });
+
       link.save();
       return false;
     }

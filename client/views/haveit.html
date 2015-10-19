@@ -29,16 +29,32 @@
 
 
 
-<template name="linkList">
+<template name="linkListReceived">
   <a href="/share">Share!</a>
 
 	<h1>Links List:</h1>
 	<ul>
-		{{#each links}}
+		{{#each receivedLinks}}
     <li><a href={{url}}>{{title}}</a></li>
 		{{/each}}
 	</ul>
 </template>
+
+
+
+
+
+<template name="linkListSent">
+  <a href="/">Inbox</a>
+
+	<h1>Sent Links List:</h1>
+	<ul>
+		{{#each sentLinks}}
+    <li><a href={{url}}>{{title}}</a> - {{recipientsDisplay.[0].emails.[0].address}}</li>
+		{{/each}}
+	</ul>
+</template>
+
 
 
 

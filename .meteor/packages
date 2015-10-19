@@ -22,7 +22,7 @@ accounts-password
 accounts-ui
 kadira:flow-router
 kadira:blaze-layout
-jagi:astronomy
 meteortoys:allthings
 reactive-var
 emdagon:bootstrap-multiselect
+emmerge:graviton
