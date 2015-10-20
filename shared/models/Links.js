@@ -35,12 +35,19 @@ LinkModel = Graviton.Model.extend({
     return this.get('createdOn');
   },
   recipientsDisplay: function() {
+    // TOFIX: It's terrible to have display logic, fix later
     var recips = this.recipients.all();
-    //var listText = recips[0].username + ', ' + recips[1].username;
-    console.log(recips);
-    console.log('  ');
-    console.log('  ');
-    return recips;
+    var displayText = '';
+    var i = 0;
+    while (i < recips.length) {
+      displayText = displayText + recips[i].username + ', ';
+      i++;
+      if (i > 2) break;
+    }
+    if (displayText.length > 1) {
+      displayText = displayText.substr(0, displayText.length - 2);
+    }
+    return displayText;
   },
   recipCount: function() {
     return this.recipients.find().count();

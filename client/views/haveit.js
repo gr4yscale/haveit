@@ -93,7 +93,7 @@ if (Meteor.isClient) {
 
   Template.friends.events({
     'submit #addFriendForm': function (event, template) {
-      Meteor.call('addFriend', event.target.email.value);
+      Meteor.call('addFriend', event.target.username.value);
       return false;
     }
   });

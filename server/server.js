@@ -3,8 +3,8 @@ Meteor.startup(function () {
 });
 
 Meteor.methods({
-	addFriend:function(email) {
-    var friend = Meteor.users.findOne({'emails.0.address' : email}); //TOFIX: find users by username
+	addFriend:function(username) {
+    var friend = Meteor.users.findOne({'username' : username}); //TOFIX: find users by username
 
     if (friend) {
         var connection = Connections.build();
