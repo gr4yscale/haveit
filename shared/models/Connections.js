@@ -1,7 +1,8 @@
-Connections = new Mongo.Collection("connections");
+//Connections = new Mongo.Collection("connections");
 
-//Connection = Astro.Class({
-  //name: 'Connection',
-  //collection: Connections,
-  //fields: {'source':'string', 'destination':'string'}
-//});
+Connections = Graviton.define("connections"); // define a Graviton so we can build a model easily
+
+// put convenience getters on models
+
+// handle validations with simple-schema
+// https://github.com/emmerge/graviton/issues/8

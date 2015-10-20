@@ -36,6 +36,7 @@ LinkModel = Graviton.Model.extend({
   },
   recipientsDisplay: function() {
     var recips = this.recipients.all();
+    //var listText = recips[0].username + ', ' + recips[1].username;
     console.log(recips);
     console.log('  ');
     console.log('  ');
@@ -44,6 +45,7 @@ LinkModel = Graviton.Model.extend({
   recipCount: function() {
     return this.recipients.find().count();
   }
+  //TOFIX : get a sender display name here
 });
 
 Links = Graviton.define("links", {

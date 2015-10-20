@@ -30,7 +30,7 @@
 
 
 <template name="linkListReceived">
-  <a href="/share">Share!</a>
+  <a href="/share">Share!</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="/sent">Sent</a>
 
 	<h1>Links List:</h1>
 	<ul>
@@ -45,7 +45,7 @@
 
 
 <template name="linkListSent">
-  <a href="/">Inbox</a>
+  <a href="/">Back to inbox</a>
 
 	<h1>Sent Links List:</h1>
 	<ul>
@@ -60,22 +60,25 @@
 
 
 <template name="linkShare">
-	<h1>Share Link:</h1>
+  <a href="/">Back to inbox</a>
+
+  <h1>Share Link:</h1>
 	
   <form id="shareLinkForm">
     <div>
-    URL:
-    <input type="text" default="url" name="url">
+    <input type="text" default="url" name="url"> URL
     </div>
     <div>
-    Title:
-		<input type="text" default="title" name="title">
+		<input type="text" default="title" name="title"> Title
+    </div>
+    <div>
+		<input type="text" default="comments" name="comments"> Comments
     </div>
 
     <div>
       <select id="friendsSelect" multiple="multiple">
         {{#each friends}}
-          <option value="{{_id }}">{{emails.[0].address}}</option>
+        <option value="{{_id }}">{{username}}</option>
         {{/each}}
       </select>
     </div>
@@ -90,7 +93,7 @@
 
 <template name="friends">
 	<form id="addFriendForm">
-		Email address:
+		Email address (make this username):
 		<input type="text" default="email address" name="email">
 		<input type="submit" name="addFriend" value="Add">
 	</form>
@@ -98,7 +101,7 @@
 	<h1>Friends:</h1>
 	<ul>
 		{{#each friends}}
-			<li>{{emails.[0].address}}</li>
+    <li>{{emails.[0].address}} ({{username}})</li>
 		{{/each}}
 	</ul>
 </template>

@@ -1,25 +1,30 @@
-
-updateFriends = function() {
-  if (Meteor.user()) {
-    Meteor.call('getFriendsForId', Meteor.user()._id, (error, data) => {
-      if (error) {
-        console.log('there was an error ' + error);
-      } else {
-        console.log('set my friends list');
-        Session.set('friendsList', data);
-      }
-    });
-  }
-};
-
-
 if (Meteor.isClient) {
+
+  Accounts.ui.config({
+    passwordSignupFields: 'USERNAME_AND_EMAIL'
+  });
 
   // Global as fuck
   console.log('isClient called');
 
   // counter starts at 0
   Session.setDefault('counter', 0);
+
+  // Autorun
+  Deps.autorun(function() {
+    // update friends list when user becomes available - HACK
+    if (Meteor.user()) {
+      Meteor.call('getFriendsForId', Meteor.user()._id, (error, data) => {
+        if (error) {
+          console.log('there was an error setting friends list ' + error);
+        } else {
+          Session.set('friendsList', data);
+        }
+      });
+    }
+  });
+
+  // Layout templates
 
   Template.onlyIfLoggedIn.helpers({
     authInProcess: function() {
@@ -32,7 +37,7 @@ if (Meteor.isClient) {
 
 
   // LinkListReceived
-  //
+  
   Template.linkListReceived.helpers({
     receivedLinks: function() {
       return Links.find( {'recipients': Meteor.user()._id} );
@@ -41,7 +46,7 @@ if (Meteor.isClient) {
 
 
   // LinkListSent
-  //
+  
   Template.linkListSent.helpers({
     sentLinks: function() {
       return Links.find( {'sender': Meteor.user()._id} );
@@ -50,24 +55,12 @@ if (Meteor.isClient) {
 
 
   // LinkShare
-  //
   
-  Template.linkShare.created = function() {
-    this.friendsStore = new ReactiveVar([]);
-
-      Meteor.call('getFriendsForId', Meteor.user()._id, (error, data) => {
-        if (error) {
-          console.log('there was an error ' + error);
-        } else {
-          this.friendsStore.set(data);
-        }
-      });
-  };
-
   Template.linkShare.helpers({
 
     friends: function() {
-      return Template.instance().friendsStore.get();
+      return Session.get('friendsList');
+      //return Template.instance().friendsStore.get();
     }
   });
 
@@ -76,7 +69,8 @@ if (Meteor.isClient) {
       var selectedFriendIds = $(event.target.friendsSelect).val();
       var link = Links.build({
         'url': event.target.url.value, 
-        'title': event.target.title.value, 
+        'title': event.target.title.value,
+        'comments' : event.target.comments.value,
         'createdOn': Date.now(),
         'sender' : Meteor.userId(),
         'recipients': selectedFriendIds
@@ -89,23 +83,11 @@ if (Meteor.isClient) {
 
   // Friends
 
-
-  Template.friends.created = function() {
-    this.friendsStore = new ReactiveVar([]);
-
-      Meteor.call('getFriendsForId', Meteor.user()._id, (error, data) => {
-        if (error) {
-          console.log('there was an error ' + error);
-        } else {
-          this.friendsStore.set(data);
-        }
-      });
-  };
-
   Template.friends.helpers({
 
     friends: function() {
-      return Template.instance().friendsStore.get();
+      return Session.get('friendsList');
+      //return Template.instance().friendsStore.get();
     }
   });
 
@@ -115,20 +97,4 @@ if (Meteor.isClient) {
       return false;
     }
   });
-
-  // Utils
-  
-  HaveIt = {
-    friendsForId: function(userId) {
-      
-      var friend_ids = Connections.find( { source: userId} )
-                                  .map(function(item){ return item.destination; });
-      if (friend_ids.length > 0) {
-        var frndz = Meteor.users.find( {_id : {$in : friend_ids}} );
-        debugger;
-        return frndz;
-      }
-      return [];
-    }
-  };
 }
