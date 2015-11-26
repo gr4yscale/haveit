@@ -2,7 +2,7 @@
 
 FlowRouter.route('/', {
     action: function(params, queryParams) {
-      BlazeLayout.render("mainLayout", {main: "linkListReceived"});
+      ReactLayout.render(LinkList, {})
     }
 });
 
@@ -14,7 +14,7 @@ FlowRouter.route('/sent', {
 
 FlowRouter.route('/share', {
     action: function(params, queryParams) {
-      BlazeLayout.render("mainLayout", {main: "linkShare"});
+    ReactLayout.render(LinkShare, {})
     }
 });
 
