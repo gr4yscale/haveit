@@ -1,3 +1,4 @@
+/*
 LinkShare = React.createClass({
   mixins: [ReactMeteorData],
   getMeteorData() {
@@ -49,3 +50,4 @@ LinkShare = React.createClass({
     </div>);
   }
 });
+*/

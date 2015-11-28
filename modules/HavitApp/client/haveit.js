@@ -1,4 +1,4 @@
-if (Meteor.isClient) {
+/*if (Meteor.isClient) {
 
   Accounts.ui.config({
     passwordSignupFields: 'USERNAME_AND_EMAIL'
@@ -37,7 +37,7 @@ if (Meteor.isClient) {
 
 
   // LinkListReceived
-  
+
   Template.linkListReceived.helpers({
     receivedLinks: function() {
       return Links.find( {'recipients': Meteor.user()._id} );
@@ -46,7 +46,7 @@ if (Meteor.isClient) {
 
 
   // LinkListSent
-  
+
   Template.linkListSent.helpers({
     sentLinks: function() {
       return Links.find( {'sender': Meteor.user()._id} );
@@ -55,7 +55,7 @@ if (Meteor.isClient) {
 
 
   // LinkShare
-  
+
   Template.linkShare.helpers({
 
     friends: function() {
@@ -68,7 +68,7 @@ if (Meteor.isClient) {
     'submit #shareLinkForm': function (event, template) {
       var selectedFriendIds = $(event.target.friendsSelect).val();
       var link = Links.build({
-        'url': event.target.url.value, 
+        'url': event.target.url.value,
         'title': event.target.title.value,
         'comments' : event.target.comments.value,
         'createdOn': Date.now(),
@@ -98,3 +98,4 @@ if (Meteor.isClient) {
     }
   });
 }
+*/

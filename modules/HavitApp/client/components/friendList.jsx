@@ -1,4 +1,5 @@
-LinkList = React.createClass({
+/*
+FriendList = React.createClass({
   mixins: [ReactMeteorData],
   getMeteorData() {
     return { };
@@ -16,3 +17,4 @@ LinkList = React.createClass({
     </div>);
   }
 });
+*/

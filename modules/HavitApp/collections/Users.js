@@ -1,8 +1,11 @@
+// const Users = Graviton.define("users");
+// Graviton.registerCollection(Meteor.users);
+
 //User = Astro.Class({
   //name: 'User',
   //collection: Meteor.users,
   //fields: { 'emails': 'array', '_id': 'string' },
-  //methods: { 
+  //methods: {
     //'getFriends': function() {
       //var friend_ids = Connections.find( { source: this._id} )
                                   //.map(function(item){ return item.destination; });

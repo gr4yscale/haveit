@@ -1,6 +1,8 @@
 //Connections = new Mongo.Collection("connections");
 
-Connections = Graviton.define("connections"); // define a Graviton so we can build a model easily
+const Connections = Graviton.define("connections"); // define a Graviton so we can build a model easily
+
+export default Connections;
 
 // put convenience getters on models
 

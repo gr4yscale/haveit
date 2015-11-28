@@ -14,10 +14,7 @@
       //}
 //});
 //
-
-Graviton.registerCollection(Meteor.users);
-
-LinkModel = Graviton.Model.extend({
+const LinkModel = Graviton.Model.extend({
   belongsToMany: {
     recipients: {
       collectionName: 'users',
@@ -55,7 +52,8 @@ LinkModel = Graviton.Model.extend({
   //TOFIX : get a sender display name here
 });
 
-Links = Graviton.define("links", {
+const Links = Graviton.define("links", {
   modelCls: LinkModel
 });
 
+export default Links;
