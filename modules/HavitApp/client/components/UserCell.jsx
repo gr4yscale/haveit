@@ -1,9 +1,9 @@
 import { Component, PropTypes } from 'react';
 import style from 'HavitApp/client/css/HavitApp.import.css';
 
-export default class FriendCell extends Component {
+export default class UserCell extends Component {
   static propTypes = {
-    link: PropTypes.object.isRequired
+    friend: PropTypes.object.isRequired
   }
 
   // handleChecked(e) {

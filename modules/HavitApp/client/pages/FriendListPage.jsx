@@ -4,13 +4,16 @@ import ReactMixin from 'react-mixin';
 import Links from 'HavitApp/collections/Links';
 import style from '../css/HavitApp.import.css';
 
-import LinkListCell from '../components/LinkListCell';
+import UserCell from '../components/UserCell';
 
 import Connections from '../../collections/Connections';
 
 @ReactMixin.decorate(ReactMeteorData)
 export default class FriendListPage extends Component {
 
+constructor () {
+  super(self);
+}
   state = {
     hideRead: false
   }
