@@ -14,6 +14,10 @@
       //}
 //});
 //
+
+
+Graviton.registerCollection(Meteor.users);
+
 const LinkModel = Graviton.Model.extend({
   belongsToMany: {
     recipients: {

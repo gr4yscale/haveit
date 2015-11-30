@@ -1,4 +1,4 @@
-import Tasks from 'HavitApp/collections/Links';
+// import Tasks from 'HavitApp/collections/Links';
 
   // addTask: function (text) {
   //   // Make sure the user is logged in before inserting a task
@@ -41,8 +41,8 @@ import Tasks from 'HavitApp/collections/Links';
   //
   //   Tasks.update(taskId, { $set: { private: setToPrivate } });
   // }
-Meteor.methods({
-});
+// Meteor.methods({
+// });
 
 /*
 Meteor.methods({
