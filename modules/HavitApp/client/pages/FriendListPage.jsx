@@ -33,20 +33,40 @@ export default class FriendListPage extends Component {
   //   this.setState({ hideCompleted: e.target.checked });
   // }
 
-  render() {
-    if (!this.data.friends) {
-      return <span>NO FRIENDS</span>;
-    }
+  _handleAddFriend(e) {
+    e.preventDefault();
+    console.log('added user ', this.usernameTextInput.value);
 
-    return (
-        <div>
-          <div key="test1">Yow</div>
-          <div key="test2" className={style.container}>
+    var friend = Meteor.users.findOne({'username' : this.usernameTextInput.value}); //TOFIX: find users by username
+
+    if (friend && friend.username !== Meteor.user().username) {
+        var connection = Connections.build();
+        connection.set({source: Meteor.userId(), destination: friend._id});
+        connection.save();
+        console.log('addFriend' + arguments);
+    }
+  }
+
+  render() {
+    let friends = <span>NO FRIENDS</span>;
+    if (this.data.friends) {
+      friends = <div>
+          <div key="friends" className={style.container}>
               <ul>
                 {this.data.friends.map(friend => <UserCell key={friend._id} friend={friend} />)}
               </ul>
           </div>
-        </div>
+        </div>;
+    }
+
+    return (
+      <div>
+        <form onSubmit={this._handleAddFriend.bind(this)}>
+        <input type="text" ref={(ref) => this.usernameTextInput = ref} default="username"/>
+        <input type="submit"/>
+        </form>
+        {friends}
+      </div>
     );
   }
 };

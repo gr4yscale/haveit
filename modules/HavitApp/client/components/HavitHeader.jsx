@@ -8,7 +8,7 @@ export default class HavitHeader extends Component {
   render() {
     return (
       <header>
-        <a href="/friend">Friends</a>
+        <a href="/friends">Friends</a>
         <LoginButtons />
       </header>
     );
