@@ -1,5 +1,5 @@
 import { Component, PropTypes } from 'react';
-import LinkCell from './LinkCell';
+import LinkLiCell from './LinkCell';
 
 export default class LinkList extends Component {
   static propTypes = {

@@ -1,14 +1,15 @@
 import { Component } from 'react';
 import ReactMixin from 'react-mixin';
 
-import HavitHeader from './components/HavitHeader';
-import LinkList from './components/LinkList';
+import HavitHeader from '../components/HavitHeader';
 
 import Links from 'HavitApp/collections/Links';
-import style from './css/HavitApp.import.css';
+import style from '../css/HavitApp.import.css';
+
+import LinkListCell from '../components/LinkListCell';
 
 @ReactMixin.decorate(ReactMeteorData)
-export default class HavitMain extends Component {
+export default class LinkListPage extends Component {
 
   state = {
     hideRead: false
@@ -50,7 +51,9 @@ export default class HavitMain extends Component {
               hideCompleted={this.state.hideCompleted}
               toggleHideCompleted={this.handleToggleHideCompleted}
           />
-          <LinkList links={this.data.links} />
+            <ul>
+              {this.data.links.map(task => <LinkCell key={link._id} link={link} />)}
+            </ul>
         </div>
     );
   }
