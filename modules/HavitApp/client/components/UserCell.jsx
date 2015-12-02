@@ -18,9 +18,9 @@ export default class UserCell extends Component {
 
   render() {
     return (
-      <li className={itemClass}>
+      <li>
         <button className={style.delete} onClick={this.handleDelete.bind(this)}>&times;</button>
-        <div>{this.props.friend.name}</div>
+        <div>{this.props.friend.username}</div>
       </li>
     );
 

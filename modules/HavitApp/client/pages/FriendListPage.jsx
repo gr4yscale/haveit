@@ -11,18 +11,7 @@ import Connections from '../../collections/Connections';
 @ReactMixin.decorate(ReactMeteorData)
 export default class FriendListPage extends Component {
 
-constructor () {
-  super(self);
-}
-  state = {
-    hideRead: false
-  }
-
   getMeteorData() {
-    //if (this.state.hideRead) {
-    //  readFilter.checked = {$ne: true};
-    //}
-
     let friends = null;
     var friend_ids = Connections.find( { source: Meteor.userId() } )
                                 .map(function(item){ return item.get('destination'); });
