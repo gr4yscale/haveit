@@ -18,6 +18,7 @@ export default class FriendListPage extends Component {
     if (friend_ids.length > 0) {
       friends = Meteor.users.find( {_id : {$in : friend_ids}} ).fetch();
     }
+    this.data.friends = friends;
     return {friends};
   }
 
@@ -27,16 +28,7 @@ export default class FriendListPage extends Component {
 
   _handleAddFriend(e) {
     e.preventDefault();
-    console.log('added user ', this.usernameTextInput.value);
-
-    var friend = Meteor.users.findOne({'username' : this.usernameTextInput.value}); //TOFIX: find users by username
-
-    if (friend && friend.username !== Meteor.user().username) {
-        var connection = Connections.build();
-        connection.set({source: Meteor.userId(), destination: friend._id});
-        connection.save();
-        console.log('addFriend' + arguments);
-    }
+    Meteor.call('addFriend', this.usernameTextInput.value);
   }
 
   render() {
